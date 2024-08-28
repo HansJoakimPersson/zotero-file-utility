@@ -14,18 +14,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js (if needed for your environment)
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Ensure you're using an up-to-date version of Node.js
+          node-version: '16' 
 
       - name: Install jq
         run: sudo apt-get install -y jq
 
+      - name: Extract Version from Tag
+        id: extract_version
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+
       - name: Build XPI
         run: |
-          # Create the XPI file, excluding unnecessary files
-          zip -r "zotero-file-utility.xpi" . -x "*.git*" -x "*.DS_Store" -x ".gitignore" -x "README.md" -x "screenshots/*"
+          # Create the XPI file with the version number in its name, excluding unnecessary files
+          zip -r "zotero-file-utility-v${{ env.VERSION }}.xpi" . -x "*.git*" -x "*.DS_Store" -x ".gitignore" -x "README.md" -x "screenshots/*"
 
       - name: Create Release
         id: create_release
@@ -42,12 +46,11 @@ jobs:
           prerelease: false
 
       - name: Upload Release Asset
-        id: upload-release-asset 
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./zotero-file-utility.xpi
-          asset_name: zotero-file-utility.xpi
+          asset_path: ./zotero-file-utility-v${{ env.VERSION }}.xpi
+          asset_name: zotero-file-utility-v${{ env.VERSION }}.xpi
           asset_content_type: application/x-xpinstall
