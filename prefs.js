@@ -1,0 +1,1 @@
+pref("extensions.file-utility.sync-filename-and-title", true);

@@ -1,0 +1,53 @@
+name: Build and Release XPI
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build XPI and Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js (if needed for your environment)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # Ensure you're using an up-to-date version of Node.js
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Build XPI
+        run: |
+          # Create the XPI file, excluding unnecessary files
+          zip -r "zotero-file-utility.xpi" . -x "*.git*" -x "*.DS_Store" -x ".gitignore" -x "README.md" -x "screenshots/*"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          body: |
+            ## What's new
+            - Automated release of zotero-file-utility version ${{ github.ref_name }}.
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./zotero-file-utility.xpi
+          asset_name: zotero-file-utility.xpi
+          asset_content_type: application/x-xpinstall

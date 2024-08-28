@@ -1,0 +1,8 @@
+### macOS ###
+# General
+.DS_Store
+
+### Build artifacts ###
+/*.xpi
+/*.zip
+/*.sh

@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "File Utility",
+  "version": "1.0.0",
+  "description": "File Utility is a Zotero plugin for various file related tasks.",
+  "homepage_url": "https://github.com/HansJoakimPersson/zotero-file-utility",
+  "applications": {
+    "zotero": {
+      "id": "file-utility@example.com",
+      "update_url": "https://zotero-download.s3.amazonaws.com/tmp/file-utility/updates-2.0.json",
+      "strict_min_version": "6.999",
+      "strict_max_version": "7.0.*"
+    }
+  }
+}
