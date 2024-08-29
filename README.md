@@ -14,23 +14,26 @@ The Zotero File Utility Plugin is designed to provide additional functionality t
 
 ### 1. Automatic Synchronization of Attachment Titles and Filenames
 
-Zotero typically keeps the attachment title and the filename on disk as separate entities. This can create inconsistencies and confusion, especially when managing large libraries. This plugin ensures that the attachment title in Zotero always matches the filename on disk, keeping your library organized and consistent. This synchronization runs in the background as long as the corresponding preference is enabled.
+Zotero typically keeps the attachment title and the filename on disk separate. This can create inconsistencies and confusion, especially when managing large libraries. This plugin ensures that the attachment title in Zotero always matches the filename on disk, keeping your library organized and consistent, especially when using linked files. This synchronization runs in the background as long as it is enabled.
 
 ### 2. Convert Stored Files to Linked Files
 
-Zotero supports the conversion of linked files to stored files but does not provide an option to convert stored files back to linked files. This plugin introduces the ability to convert stored files into linked files within your specified "Linked Attachments Base Directory." This feature can be accessed under the `Tools -> Manage Attachments` menu in Zotero.
-and are useful for advanced users who manage their Zotero libraries across multiple devices or prefer to use external storage solutions like Dropbox or Google Drive.
+Zotero supports the conversion of linked files to stored files but does not provide an option to do the reverse. This plugin introduces an option to convert stored files into linked files within your specified `Linked Attachments Base Directory`. This feature can be accessed under the `Tools -> Manage Attachments` menu in Zotero and is useful for advanced users who manage their Zotero libraries across multiple devices or prefer to use external storage solutions like iCloud, Dropbox or Google Drive.
 
 ## Installation
 
 ### From Local File
 
 1. Download the latest release (.xpi file) from the [Latest Release Page](https://github.com/HansJoakimPersson/zotero-file-utility/releases/latest).
-    - **Note:** If you're using Firefox as your browser, right-click the `.xpi` file and select "Save As.."
+   - **Note:** If you're using Firefox as your browser, right-click the `.xpi` file and select "Save As.."
 2. In Zotero, click `Tools` in the top menu bar and then click `Add-ons`.
 3. Go to the `Extensions` page and then click the gear icon in the top right.
 4. Select `Install Add-on from file...`.
 5. Browse to where you downloaded the `.xpi` file and select it.
+
+## Activating Plugins
+
+Plugins in Zotero are not automatically activated when installed. You must manually enable them by toggling them on under `Tools -> Add-ons`.
 
 ## Configuration
 
@@ -44,10 +47,11 @@ These options are saved as Zotero preferences variables, which are also availabl
 
 ## Feedback
 
-Suggestions/improvements are
-[welcome](https://github.com/HansJoakimPersson/zotero-file-utility/issues)! Please feel free to submit a pull request or open an issue for any feature requests or bugs.
+Suggestions/improvements are [welcome](https://github.com/HansJoakimPersson/zotero-file-utility/issues)! Please feel free to submit a pull request or open an issue for any feature requests or bugs. I would be more than happy if the development team at Zotero considered implementing these features as part of the native functionality.
 
 ## ¯\\_(ツ)_/¯ Disclaimer / Warning / Liability
+
+I'm not a professional developer in JavaScript or any other programming language, nor am I an experienced collaborator in open-source projects. Much of this plugin was developed with the help of ChatGPT, so while I’ve done my best to ensure it works as intended, there may be quirks or unforeseen issues.
 
 > Warning:
 > This plugin is provided "as is" without any warranties or guarantees. The author takes no responsibility for any issues or damages that may result from the use of this plugin. :)
